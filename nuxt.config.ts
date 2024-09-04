@@ -5,10 +5,6 @@ export default defineNuxtConfig({
   experimental:{
     appManifest: false,
   },
-
-  id:'app',
-  rootId:'app',
-
   vite: {
     build: {
       rollupOptions: {
