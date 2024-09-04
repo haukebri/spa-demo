@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <h1>Welcome to the Home Page</h1>
+    <h1>Welcome to the Home Page!</h1>
     <p>This is a demo home page with some options passed from AEM:</p>
     <div v-if="!Object.keys(cqOptions)">
       No options found
