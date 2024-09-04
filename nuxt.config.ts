@@ -2,6 +2,13 @@
 export default defineNuxtConfig({
   devtools: {enabled: true},
   ssr: false,
+  routeRules: {
+    '/': {prerender: false},
+    '/index.html': {prerender: false},
+    '/200.html': {prerender: false},
+    '/404.html': {prerender: false},
+  },
+
   vite: {
     build: {
       rollupOptions: {
