@@ -2,14 +2,14 @@
   <div class="home">
     <h1>Welcome to the Home Page!</h1>
     <p>This is a demo home page with some options passed from AEM:</p>
-    <div v-if="!Object.keys(cqOptions)">
-      No options found
-    </div>
-    <ul>
-      <li v-for="(value, key) in cqOptions" :key="key">
-        {{ key }}: {{ value }}
-      </li>
-    </ul>
+    <pre style='text-align:left;padding:10px;font-size:11px;line-height:15px;color:#000;background:#BCFECB;'>
+    Dev output
+    var cqOptions is {{ cqOptionsType }}
+    
+    content of cqOptions:
+    {{ cqOptions }}
+    </pre>
+    
     <nuxt-link to="/about" class="link">Go to About Page</nuxt-link>
   </div>
 </template>
@@ -19,6 +19,7 @@ export default {
   name: 'HomePage',
   data() {
     return {
+      cqOptionsType: typeof cqOptions,
       cqOptions: {},
     };
   },
@@ -27,7 +28,9 @@ export default {
   },
   methods: {
     handleCQOptions() {
-      this.cqOptions = window.cqOptions || {};
+      if (typeof cqOptions !== 'undefined') {
+        this.cqOptions = cqOptions;
+      }
     },
   },
 }
