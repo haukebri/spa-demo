@@ -11,6 +11,24 @@
     </pre>
     
     <nuxt-link to="/about" class="link">Go to About Page</nuxt-link>
+
+    <p>
+      Loading JSON data:
+      <ul>
+        <li>
+          Load data from https://stage-aem-backend.aida.de:8443/content/aida-component-library/demo-pages/test-components/AIDA-10528-CP-SPA-Frame.model.json
+          <br>
+          <button @click="loadJson('https://stage-aem-backend.aida.de:8443/content/aida-component-library/demo-pages/test-components/AIDA-10528-CP-SPA-Frame.model.json')">Load json</button>
+        </li>
+        <li>
+          Load from free URL:
+          <br>
+          <input type="text" name="jsonurl" v-model="jsonurl">
+          <button @click="loadJson(jsonurl)">Load json</button>
+        </li>
+      </ul>
+    </p>
+
   </div>
 </template>
 
@@ -21,6 +39,7 @@ export default {
     return {
       cqOptionsType: typeof cqOptions,
       cqOptions: {},
+      jsonurl: '< enter url >',
     };
   },
   mounted() {
@@ -31,6 +50,13 @@ export default {
       if (typeof cqOptions !== 'undefined') {
         this.cqOptions = cqOptions;
       }
+    },
+    loadJson(url) {
+      fetch(url)
+        .then((response) => response.json())
+        .then((data) => {
+          console.log(data);
+        });
     },
   },
 }
