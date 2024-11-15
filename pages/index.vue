@@ -50,7 +50,7 @@ export default {
     this.handleCQOptions();
 
     // add eventlistener to listen for cqOptions spa-frame-ready
-    document.addEventListener('cqOptions', (event) => {
+    document.addEventListener('spa-frame-ready', () => {
       this.spaReadyEventFired = true;
       this.handleCQOptions();
     });
