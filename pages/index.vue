@@ -2,10 +2,13 @@
   <div class="home">
     <h1>Welcome to the Home Page!</h1>
     <p>This is a demo home page with some options passed from AEM:</p>
+
+
+    <p>
+      <span v-if="spaReadyEventFired" >We listened to the event 'spa-frame-ready' successfully, let's pull the cqOptions</span>
+      <span v-else >We did not receive the 'spa-frame-ready' event yet.</span>
+    </p>
     <pre style='text-align:left;padding:10px;font-size:11px;line-height:15px;color:#000;background:#BCFECB;'>
-    Dev output
-    var cqOptions is {{ cqOptionsType }}
-    
     content of cqOptions:
     {{ cqOptions }}
     </pre>
@@ -40,10 +43,17 @@ export default {
       cqOptionsType: typeof cqOptions,
       cqOptions: {},
       jsonurl: '< enter url >',
+      spaReadyEventFired: false,
     };
   },
   mounted() {
     this.handleCQOptions();
+
+    // add eventlistener to listen for cqOptions spa-frame-ready
+    document.addEventListener('cqOptions', (event) => {
+      this.spaReadyEventFired = true;
+      this.handleCQOptions();
+    });
   },
   methods: {
     handleCQOptions() {
